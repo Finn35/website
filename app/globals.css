@@ -74,4 +74,13 @@
   .tabular {
     font-variant-numeric: tabular-nums;
   }
+
+  /* Hide horizontal scrollbar but keep scrolling, used by the booking day picker. */
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
 }

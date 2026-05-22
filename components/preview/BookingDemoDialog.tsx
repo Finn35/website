@@ -72,12 +72,11 @@ export function BookingDemoDialog({
             </span>
 
             <h3 className="mt-4 font-display text-[24px] font-medium leading-tight text-ink text-balance sm:text-[26px]">
-              Dit is een demo van Lumeq.
+              Dit is een demo.
             </h3>
             <p className="mt-3 max-w-[44ch] text-[14.5px] leading-relaxed text-ink/65">
-              Deze website is een voorbeeld — er gebeurt nog niets als je een
-              tijd kiest. Wil je een échte online boeking voor jouw zaak?{" "}
-              <span className="text-ink">Lumeq regelt het.</span>
+              Wil je echt online boeken voor jouw zaak?{" "}
+              <span className="text-ink">Lumeq regelt dit voor jou.</span>
             </p>
 
             <div className="mt-7 flex flex-col-reverse gap-2 sm:flex-row sm:items-center sm:justify-end">
@@ -93,7 +92,7 @@ export function BookingDemoDialog({
                 onClick={onConfirm}
                 className="group inline-flex h-11 items-center justify-center gap-2 rounded-button bg-burgundy px-5 text-[14px] font-medium text-canvas shadow-burgundy transition-colors duration-200 hover:bg-burgundy-700 hover:shadow-burgundy-hover"
               >
-                Lumeq regelt het
+                Neem contact op
                 <span
                   aria-hidden
                   className="transition-transform duration-300 group-hover:translate-x-0.5"
