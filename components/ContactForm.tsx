@@ -32,6 +32,10 @@ const PAKKET_ORDER: readonly Pakket[] = [
 export type ContactFormProps = {
   /** Pre-selected package, e.g. from a pricing card or `?pakket=` URL param. */
   initialPakket?: Pakket;
+  /** Pre-filled company name (e.g. when opening from a /preview/[slug] page). */
+  initialBedrijfsnaam?: string;
+  initialNaam?: string;
+  initialEmail?: string;
   /** Where this form is being shown — gets stored alongside the lead. */
   source?: LeadSource;
   /** Called after a successful insert (e.g. by the modal to enable auto-close). */
@@ -41,6 +45,9 @@ export type ContactFormProps = {
 
 export function ContactForm({
   initialPakket = "onbekend",
+  initialBedrijfsnaam = "",
+  initialNaam = "",
+  initialEmail = "",
   source = "modal",
   onSuccess,
   className,
@@ -48,17 +55,26 @@ export function ContactForm({
   const t = useT().contact;
   const { lang } = useLang();
 
-  const [bedrijfsnaam, setBedrijfsnaam] = useState("");
-  const [naam, setNaam] = useState("");
-  const [email, setEmail] = useState("");
+  const [bedrijfsnaam, setBedrijfsnaam] = useState(initialBedrijfsnaam);
+  const [naam, setNaam] = useState(initialNaam);
+  const [email, setEmail] = useState(initialEmail);
   const [telefoon, setTelefoon] = useState("");
   const [website, setWebsite] = useState("");
   const [pakket, setPakket] = useState<Pakket>(initialPakket);
 
-  // If the modal is re-opened with a different package, keep the radio in sync.
+  // If the modal is re-opened with different initial values, sync them in.
   useEffect(() => {
     setPakket(initialPakket);
   }, [initialPakket]);
+  useEffect(() => {
+    if (initialBedrijfsnaam) setBedrijfsnaam(initialBedrijfsnaam);
+  }, [initialBedrijfsnaam]);
+  useEffect(() => {
+    if (initialNaam) setNaam(initialNaam);
+  }, [initialNaam]);
+  useEffect(() => {
+    if (initialEmail) setEmail(initialEmail);
+  }, [initialEmail]);
 
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitting, setSubmitting] = useState(false);

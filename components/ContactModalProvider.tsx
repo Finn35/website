@@ -13,8 +13,24 @@ import { ContactForm } from "@/components/ContactForm";
 import { useT } from "@/components/LanguageProvider";
 import type { Pakket } from "@/lib/leads";
 
+export type ContactPrefill = {
+  bedrijfsnaam?: string;
+  naam?: string;
+  email?: string;
+};
+
+export type OpenContactOptions = {
+  pakket?: Pakket;
+  prefill?: ContactPrefill;
+};
+
 type ContactModalContextValue = {
-  open: (pakket?: Pakket) => void;
+  /**
+   * Open the contact modal. Accepts either a shorthand `Pakket` string
+   * (preserves the old API) or an options object with optional `pakket`
+   * and `prefill` fields.
+   */
+  open: (arg?: Pakket | OpenContactOptions) => void;
   close: () => void;
   isOpen: boolean;
 };
@@ -30,9 +46,19 @@ const ContactModalContext = createContext<ContactModalContextValue | null>(
 export function ContactModalProvider({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
   const [pakket, setPakket] = useState<Pakket>("onbekend");
+  const [prefill, setPrefill] = useState<ContactPrefill>({});
 
-  const open = useCallback((p: Pakket = "onbekend") => {
-    setPakket(p);
+  const open = useCallback((arg?: Pakket | OpenContactOptions) => {
+    if (typeof arg === "string") {
+      setPakket(arg);
+      setPrefill({});
+    } else if (arg) {
+      setPakket(arg.pakket ?? "onbekend");
+      setPrefill(arg.prefill ?? {});
+    } else {
+      setPakket("onbekend");
+      setPrefill({});
+    }
     setIsOpen(true);
   }, []);
 
@@ -66,6 +92,7 @@ export function ContactModalProvider({ children }: { children: ReactNode }) {
         isOpen={isOpen}
         onClose={close}
         initialPakket={pakket}
+        prefill={prefill}
       />
     </ContactModalContext.Provider>
   );
@@ -89,10 +116,12 @@ function ContactModal({
   isOpen,
   onClose,
   initialPakket,
+  prefill,
 }: {
   isOpen: boolean;
   onClose: () => void;
   initialPakket: Pakket;
+  prefill: ContactPrefill;
 }) {
   const t = useT().contact;
 
@@ -147,6 +176,9 @@ function ContactModal({
 
               <ContactForm
                 initialPakket={initialPakket}
+                initialBedrijfsnaam={prefill.bedrijfsnaam}
+                initialNaam={prefill.naam}
+                initialEmail={prefill.email}
                 source="modal"
               />
             </div>
