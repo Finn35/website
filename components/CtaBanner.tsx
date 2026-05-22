@@ -2,10 +2,12 @@
 
 import { Button, ArrowRight } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
+import { useContactModal } from "@/components/ContactModalProvider";
 import { useT } from "@/components/LanguageProvider";
 
 export function CtaBanner() {
   const { ctaBanner } = useT();
+  const { open: openContact } = useContactModal();
 
   return (
     <section
@@ -73,9 +75,13 @@ export function CtaBanner() {
             <Reveal delay={0.26}>
               <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
                 <Button
-                  href="mailto:hello@lumeq.eu?subject=Gratis%20mockup"
+                  href="/contact"
                   variant="burgundy"
                   size="lg"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    openContact();
+                  }}
                 >
                   {ctaBanner.button}
                   <ArrowRight />

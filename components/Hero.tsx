@@ -3,11 +3,13 @@
 import { motion } from "framer-motion";
 import { Button, ArrowRight } from "@/components/ui/Button";
 import { BrowserMockup } from "@/components/BrowserMockup";
+import { useContactModal } from "@/components/ContactModalProvider";
 import { useT } from "@/components/LanguageProvider";
 import { staggerChild, staggerParent } from "@/components/ui/Reveal";
 
 export function Hero() {
   const { hero } = useT();
+  const { open: openContact } = useContactModal();
 
   return (
     <section
@@ -60,7 +62,15 @@ export function Hero() {
               variants={staggerChild}
               className="mt-8 flex flex-wrap items-center gap-3"
             >
-              <Button href="#contact" variant="burgundy" size="lg">
+              <Button
+                href="/contact"
+                variant="burgundy"
+                size="lg"
+                onClick={(e) => {
+                  e.preventDefault();
+                  openContact();
+                }}
+              >
                 {hero.ctaPrimary}
                 <ArrowRight />
               </Button>

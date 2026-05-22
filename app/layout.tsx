@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, DM_Sans } from "next/font/google";
+import { ContactModalProvider } from "@/components/ContactModalProvider";
 import { LanguageProvider } from "@/components/LanguageProvider";
 import "./globals.css";
 
@@ -51,7 +52,9 @@ export default function RootLayout({
   return (
     <html lang="nl" className={`${display.variable} ${sans.variable}`}>
       <body className="min-h-screen bg-canvas text-ink antialiased">
-        <LanguageProvider>{children}</LanguageProvider>
+        <LanguageProvider>
+          <ContactModalProvider>{children}</ContactModalProvider>
+        </LanguageProvider>
       </body>
     </html>
   );

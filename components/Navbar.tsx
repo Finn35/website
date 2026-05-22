@@ -4,11 +4,13 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { useContactModal } from "@/components/ContactModalProvider";
 import { useT } from "@/components/LanguageProvider";
 import { cn } from "@/lib/cn";
 
 export function Navbar() {
   const t = useT();
+  const { open: openContact } = useContactModal();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -52,7 +54,15 @@ export function Navbar() {
         {/* Right cluster — desktop: 2 items only */}
         <div className="hidden items-center gap-3 md:flex">
           <LanguageSwitcher size="sm" tone="light" />
-          <Button href="#contact" variant="burgundy" size="sm">
+          <Button
+            href="/contact"
+            variant="burgundy"
+            size="sm"
+            onClick={(e) => {
+              e.preventDefault();
+              openContact();
+            }}
+          >
             {t.nav.cta}
           </Button>
         </div>
@@ -102,11 +112,15 @@ export function Navbar() {
               <div className="mt-4 flex items-center justify-between gap-3 border-t border-line pt-4">
                 <LanguageSwitcher size="md" tone="light" />
                 <Button
-                  href="#contact"
+                  href="/contact"
                   variant="burgundy"
                   size="md"
                   className="flex-1 justify-center"
-                  onClick={() => setOpen(false)}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setOpen(false);
+                    openContact();
+                  }}
                 >
                   {t.nav.cta}
                 </Button>

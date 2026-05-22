@@ -4,7 +4,9 @@ import { animate, AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { Reveal, staggerChild, staggerParent } from "@/components/ui/Reveal";
+import { useContactModal } from "@/components/ContactModalProvider";
 import { useT } from "@/components/LanguageProvider";
+import type { Pakket } from "@/lib/leads";
 import { cn } from "@/lib/cn";
 
 type BillingMode = "monthly" | "onetime";
@@ -13,6 +15,9 @@ const PLAN_PRICES = [
   { monthly: 49, onetime: 399, hosting: 19 },
   { monthly: 79, onetime: 699, hosting: 29 },
 ] as const;
+
+// Mirrors the order in i18n.pricing.plans (Starter, Groei).
+const PLAN_PAKKETS: readonly Pakket[] = ["starter", "groei"];
 
 export function Pricing() {
   const t = useT();
@@ -56,6 +61,7 @@ export function Pricing() {
               <PricingCard
                 plan={plan}
                 prices={PLAN_PRICES[i]}
+                pakket={PLAN_PAKKETS[i]}
                 mode={mode}
                 featured={i === 1}
               />
@@ -167,6 +173,7 @@ function ToggleOption({
 function PricingCard({
   plan,
   prices,
+  pakket,
   mode,
   featured,
 }: {
@@ -178,10 +185,12 @@ function PricingCard({
     cta: string;
   };
   prices: { monthly: number; onetime: number; hosting: number };
+  pakket: Pakket;
   mode: BillingMode;
   featured: boolean;
 }) {
   const t = useT();
+  const { open: openContact } = useContactModal();
   const target = mode === "monthly" ? prices.monthly : prices.onetime;
   const [display, setDisplay] = useState(target);
 
@@ -279,13 +288,19 @@ function PricingCard({
         ))}
       </ul>
 
-      {/* CTA */}
+      {/* CTA — opens the contact modal with this plan pre-selected.
+          The href still points at the standalone page so right-click /
+          middle-click open work, and the link is crawlable. */}
       <div className="relative mt-8">
         <Button
-          href="#contact"
+          href={`/contact?pakket=${pakket}`}
           variant={featured ? "burgundy" : "ink"}
           size="lg"
           className="w-full justify-center"
+          onClick={(e) => {
+            e.preventDefault();
+            openContact(pakket);
+          }}
         >
           {plan.cta}
         </Button>

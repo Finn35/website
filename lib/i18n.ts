@@ -82,6 +82,41 @@ export type Translations = {
     copy: string;
     suffix: string;
   };
+  contact: {
+    title: string;
+    subtitle: string;
+    fields: {
+      bedrijfsnaam: string;
+      naam: string;
+      email: string;
+      telefoon: string;
+      website: string;
+      pakketLabel: string;
+    };
+    pakket: {
+      starter: string;
+      groei: string;
+      eenmalig: string;
+      onbekend: string;
+    };
+    errors: {
+      bedrijfsnaam: string;
+      naam: string;
+      email: string;
+      emailFormat: string;
+      submit: string;
+    };
+    submitting: string;
+    submit: string;
+    success: {
+      // Use the {name} and {company} placeholders.
+      title: string;
+      body: string;
+    };
+    privacy: string;
+    close: string;
+    backToHome: string;
+  };
   langSwitch: { nl: string; en: string; label: string };
 };
 
@@ -237,6 +272,43 @@ const nl: Translations = {
     copy: "© 2026 Lumeq",
     suffix: "Met zorg gemaakt in Nederland",
   },
+  contact: {
+    title: "Vraag een gratis mockup aan",
+    subtitle:
+      "Vul je gegevens in. Binnen 48 uur ontvang je een mockup van jouw nieuwe website — geheel vrijblijvend.",
+    fields: {
+      bedrijfsnaam: "Bedrijfsnaam",
+      naam: "Jouw naam",
+      email: "E-mailadres",
+      telefoon: "Telefoonnummer (optioneel)",
+      website: "Huidige website (optioneel)",
+      pakketLabel: "Pakket interesse",
+    },
+    pakket: {
+      starter: "Starter — €49/maand",
+      groei: "Groei — €79/maand",
+      eenmalig: "Eenmalig",
+      onbekend: "Nog niet zeker",
+    },
+    errors: {
+      bedrijfsnaam: "Vul je bedrijfsnaam in",
+      naam: "Vul je naam in",
+      email: "Vul je e-mailadres in",
+      emailFormat: "Dit is geen geldig e-mailadres",
+      submit:
+        "Er ging iets mis. Probeer het opnieuw of mail ons direct op hello@lumeq.eu.",
+    },
+    submitting: "Versturen…",
+    submit: "Verstuur aanvraag",
+    success: {
+      title: "Bedankt {name}!",
+      body: "We maken binnen 48 uur een gratis mockup van {company}. Check je inbox.",
+    },
+    privacy:
+      "We gebruiken je gegevens alleen om contact met je op te nemen.",
+    close: "Sluiten",
+    backToHome: "← Terug naar home",
+  },
   langSwitch: { nl: "NL", en: "EN", label: "Taal" },
 };
 
@@ -391,6 +463,42 @@ const en: Translations = {
       "Boutique web studio. Modern, calm, built to last.",
     copy: "© 2026 Lumeq",
     suffix: "Made with care in the Netherlands",
+  },
+  contact: {
+    title: "Get a free mockup",
+    subtitle:
+      "Tell us a bit about your business. Within 48 hours you'll receive a mockup of your new website — no commitment.",
+    fields: {
+      bedrijfsnaam: "Company name",
+      naam: "Your name",
+      email: "Email",
+      telefoon: "Phone (optional)",
+      website: "Current website (optional)",
+      pakketLabel: "Package interest",
+    },
+    pakket: {
+      starter: "Starter — €49/mo",
+      groei: "Growth — €79/mo",
+      eenmalig: "One-time",
+      onbekend: "Not sure yet",
+    },
+    errors: {
+      bedrijfsnaam: "Please enter your company name",
+      naam: "Please enter your name",
+      email: "Please enter your email",
+      emailFormat: "This doesn't look like a valid email",
+      submit:
+        "Something went wrong. Please try again, or email us at hello@lumeq.eu.",
+    },
+    submitting: "Sending…",
+    submit: "Send request",
+    success: {
+      title: "Thanks {name}!",
+      body: "We'll have a free mockup of {company} ready within 48 hours. Check your inbox.",
+    },
+    privacy: "We only use your details to get in touch with you.",
+    close: "Close",
+    backToHome: "← Back to home",
   },
   langSwitch: { nl: "NL", en: "EN", label: "Language" },
 };

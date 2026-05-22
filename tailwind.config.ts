@@ -25,6 +25,8 @@ const config: Config = {
         surface: "#FFFFFF",       // pure white card surfaces
         paper: "#F4F4F2",         // alternating section background
         featured: "#F5F0EB",      // warm off-white for featured pricing card
+        cream: "#F7F3EE",         // contact form / modal background
+        selected: "#FDF5F6",      // selected radio-card background (light burgundy tint)
         line: "#E6E5E1",          // subtle borders
         ink: {
           DEFAULT: "#18181B",
