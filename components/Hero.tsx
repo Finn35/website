@@ -14,7 +14,7 @@ export function Hero() {
   return (
     <section
       id="top"
-      className="relative isolate w-full overflow-hidden bg-canvas pt-28 sm:pt-32"
+      className="relative isolate w-full overflow-hidden bg-canvas pt-20 sm:pt-32"
     >
       {/* Soft burgundy glow */}
       <div

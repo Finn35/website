@@ -164,12 +164,12 @@ function ContactModal({
               </svg>
             </button>
 
-            <div className="px-4 pb-7 pt-9 sm:px-10 sm:pb-10 sm:pt-10">
-              <header className="mb-7 pr-8">
-                <h2 className="font-display text-[26px] font-medium leading-tight text-ink text-balance sm:text-[30px]">
+            <div className="px-5 pb-6 pt-7 sm:px-10 sm:pb-10 sm:pt-10">
+              <header className="mb-5 pr-8 sm:mb-7">
+                <h2 className="font-display text-[24px] font-medium leading-tight text-ink text-balance sm:text-[30px]">
                   {t.title}
                 </h2>
-                <p className="mt-2 max-w-[52ch] text-[14.5px] leading-relaxed text-ink/60">
+                <p className="mt-1.5 max-w-[52ch] text-[14px] leading-relaxed text-ink/60 sm:mt-2 sm:text-[14.5px]">
                   {t.subtitle}
                 </p>
               </header>

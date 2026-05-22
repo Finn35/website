@@ -94,11 +94,12 @@ export type Translations = {
       pakketLabel: string;
     };
     pakket: {
-      starter: string;
-      groei: string;
-      eenmalig: string;
-      onbekend: string;
+      starter: { label: string; price: string };
+      groei: { label: string; price: string };
+      eenmalig: { label: string; price: string };
+      onbekend: { label: string; price: string };
     };
+    optionalToggle: string;
     errors: {
       bedrijfsnaam: string;
       naam: string;
@@ -285,11 +286,12 @@ const nl: Translations = {
       pakketLabel: "Pakket interesse",
     },
     pakket: {
-      starter: "Starter — €49/maand",
-      groei: "Groei — €79/maand",
-      eenmalig: "Eenmalig",
-      onbekend: "Nog niet zeker",
+      starter: { label: "Starter", price: "€49/maand" },
+      groei: { label: "Groei", price: "€79/maand" },
+      eenmalig: { label: "Eenmalig", price: "" },
+      onbekend: { label: "Nog niet zeker", price: "" },
     },
+    optionalToggle: "Telefoon en website toevoegen",
     errors: {
       bedrijfsnaam: "Vul je bedrijfsnaam in",
       naam: "Vul je naam in",
@@ -477,11 +479,12 @@ const en: Translations = {
       pakketLabel: "Package interest",
     },
     pakket: {
-      starter: "Starter — €49/mo",
-      groei: "Growth — €79/mo",
-      eenmalig: "One-time",
-      onbekend: "Not sure yet",
+      starter: { label: "Starter", price: "€49/mo" },
+      groei: { label: "Growth", price: "€79/mo" },
+      eenmalig: { label: "One-time", price: "" },
+      onbekend: { label: "Not sure yet", price: "" },
     },
+    optionalToggle: "Add phone and website",
     errors: {
       bedrijfsnaam: "Please enter your company name",
       naam: "Please enter your name",

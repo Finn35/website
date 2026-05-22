@@ -82,6 +82,12 @@ export function ContactForm({
   const [success, setSuccess] = useState<
     { naam: string; bedrijfsnaam: string } | null
   >(null);
+  // Optional fields (telefoon / website) are collapsed by default to keep
+  // the mobile form short. Auto-expand if the user has already filled one
+  // — e.g. when re-opening the form after a validation error.
+  const [showOptional, setShowOptional] = useState<boolean>(
+    Boolean(telefoon || website)
+  );
 
   function validate(): boolean {
     const next: Record<string, string> = {};
@@ -134,7 +140,7 @@ export function ContactForm({
     <form
       onSubmit={handleSubmit}
       noValidate
-      className={cn("flex flex-col gap-5", className)}
+      className={cn("flex flex-col gap-4", className)}
     >
       <Field
         id="bedrijfsnaam"
@@ -173,29 +179,6 @@ export function ContactForm({
         />
       </Field>
 
-      <Field id="telefoon" label={t.fields.telefoon}>
-        <TextInput
-          id="telefoon"
-          type="tel"
-          value={telefoon}
-          onChange={(e) => setTelefoon(e.target.value)}
-          autoComplete="tel"
-          inputMode="tel"
-        />
-      </Field>
-
-      <Field id="website" label={t.fields.website}>
-        <TextInput
-          id="website"
-          type="url"
-          value={website}
-          onChange={(e) => setWebsite(e.target.value)}
-          autoComplete="url"
-          inputMode="url"
-          placeholder="https://"
-        />
-      </Field>
-
       <fieldset className="flex flex-col gap-3">
         <legend className="mb-0 text-[13px] font-medium text-ink/70">
           {t.fields.pakketLabel}{" "}
@@ -206,19 +189,77 @@ export function ContactForm({
         <div
           role="radiogroup"
           aria-label={t.fields.pakketLabel}
-          className="grid grid-cols-1 gap-3 sm:grid-cols-2"
+          className="grid grid-cols-2 gap-2.5 sm:gap-3"
         >
           {PAKKET_ORDER.map((p) => (
             <PakketCard
               key={p}
               value={p}
               active={pakket === p}
-              label={t.pakket[p]}
+              label={t.pakket[p].label}
+              price={t.pakket[p].price}
               onSelect={() => setPakket(p)}
             />
           ))}
         </div>
       </fieldset>
+
+      {/* Optional fields — hidden by default so the mobile form stays short. */}
+      <AnimatePresence initial={false} mode="popLayout">
+        {showOptional ? (
+          <motion.div
+            key="optional-fields"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            className="overflow-hidden"
+          >
+            <div className="flex flex-col gap-4">
+              <Field id="telefoon" label={t.fields.telefoon}>
+                <TextInput
+                  id="telefoon"
+                  type="tel"
+                  value={telefoon}
+                  onChange={(e) => setTelefoon(e.target.value)}
+                  autoComplete="tel"
+                  inputMode="tel"
+                  autoFocus
+                />
+              </Field>
+              <Field id="website" label={t.fields.website}>
+                <TextInput
+                  id="website"
+                  type="url"
+                  value={website}
+                  onChange={(e) => setWebsite(e.target.value)}
+                  autoComplete="url"
+                  inputMode="url"
+                  placeholder="https://"
+                />
+              </Field>
+            </div>
+          </motion.div>
+        ) : (
+          <motion.button
+            key="optional-toggle"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            type="button"
+            onClick={() => setShowOptional(true)}
+            className="group inline-flex items-center gap-2 self-start text-[13.5px] text-ink/55 transition-colors hover:text-burgundy"
+          >
+            <span
+              aria-hidden
+              className="grid h-[18px] w-[18px] place-items-center rounded-full border border-ink/25 text-[14px] leading-none text-ink/65 transition-colors group-hover:border-burgundy group-hover:text-burgundy"
+            >
+              +
+            </span>
+            {t.optionalToggle}
+          </motion.button>
+        )}
+      </AnimatePresence>
 
       <button
         type="submit"
@@ -346,11 +387,13 @@ function PakketCard({
   value,
   active,
   label,
+  price,
   onSelect,
 }: {
   value: Pakket;
   active: boolean;
   label: string;
+  price?: string;
   onSelect: () => void;
 }) {
   return (
@@ -361,22 +404,31 @@ function PakketCard({
       data-value={value}
       onClick={onSelect}
       className={cn(
-        "group relative flex min-h-[56px] w-full items-center justify-between gap-3 rounded-[10px] border bg-surface px-4 py-3 text-left transition-all duration-200",
+        "group relative flex min-h-[64px] w-full items-center gap-3 rounded-[10px] border bg-surface px-3 py-2.5 text-left transition-all duration-200 sm:px-3.5",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-burgundy/40 focus-visible:ring-offset-2 focus-visible:ring-offset-cream",
         active
           ? "border-burgundy bg-selected"
           : "border-ink/12 hover:border-ink/30 hover:bg-ink/[0.015]"
       )}
     >
-      <span className="text-[14.5px] font-medium text-ink">{label}</span>
       <span
         aria-hidden
         className={cn(
-          "grid h-5 w-5 shrink-0 place-items-center rounded-full border transition-colors duration-200",
+          "grid h-[18px] w-[18px] shrink-0 place-items-center rounded-full border transition-colors duration-200",
           active ? "border-burgundy bg-burgundy" : "border-ink/25 bg-surface"
         )}
       >
-        {active && <span className="block h-2 w-2 rounded-full bg-canvas" />}
+        {active && <span className="block h-[7px] w-[7px] rounded-full bg-canvas" />}
+      </span>
+      <span className="flex min-w-0 flex-1 flex-col">
+        <span className="truncate text-[14px] font-medium leading-tight text-ink">
+          {label}
+        </span>
+        {price ? (
+          <span className="mt-0.5 truncate text-[12.5px] leading-tight text-ink/55 tabular">
+            {price}
+          </span>
+        ) : null}
       </span>
     </button>
   );
