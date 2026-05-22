@@ -10,7 +10,7 @@ export function Features() {
   return (
     <section
       id="features"
-      className="relative bg-paper py-20 text-ink sm:py-28"
+      className="relative bg-paper py-14 text-ink sm:py-28"
     >
       <div className="mx-auto w-full max-w-[1240px] px-5 sm:px-8 lg:px-12">
         <div className="mx-auto max-w-3xl text-center">
@@ -34,7 +34,7 @@ export function Features() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.2 }}
-          className="mx-auto mt-14 grid max-w-[1100px] grid-cols-1 gap-5 sm:mt-16 md:grid-cols-3 md:gap-6"
+          className="mx-auto mt-10 grid max-w-[1100px] grid-cols-1 gap-5 sm:mt-16 md:grid-cols-3 md:gap-6"
         >
           {features.items.map((item, i) => (
             <motion.li

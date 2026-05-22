@@ -11,9 +11,9 @@ export function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="relative bg-paper py-20 text-ink sm:py-28">
+    <section id="faq" className="relative bg-paper py-14 text-ink sm:py-28">
       <div className="mx-auto w-full max-w-[1240px] px-5 sm:px-8 lg:px-12">
-        <div className="grid gap-12 md:grid-cols-12 md:gap-16">
+        <div className="grid gap-10 md:grid-cols-12 md:gap-16">
           <Reveal className="md:col-span-5">
             <span className="eyebrow text-ink/55">{faq.eyebrow}</span>
             <h2 className="mt-6 max-w-[16ch] font-display text-display-lg font-medium leading-[1.04] text-ink text-balance">
@@ -24,7 +24,7 @@ export function FAQ() {
             </p>
             <a
               href={`mailto:${faq.contactLink}`}
-              className="group mt-8 inline-flex items-center gap-3 border-b border-ink/15 pb-2 text-[14.5px] text-ink transition-colors hover:border-burgundy hover:text-burgundy"
+              className="group mt-6 inline-flex items-center gap-3 border-b border-ink/15 pb-2 text-[14.5px] text-ink transition-colors hover:border-burgundy hover:text-burgundy sm:mt-8"
             >
               {faq.contactLink}
               <svg

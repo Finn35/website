@@ -26,9 +26,9 @@ export function Hero() {
         }}
       />
 
-      <div className="mx-auto w-full max-w-[1240px] px-5 pb-20 sm:px-8 sm:pb-28 lg:px-12">
+      <div className="mx-auto w-full max-w-[1240px] px-5 pb-14 sm:px-8 sm:pb-28 lg:px-12">
         {/* Split at md (768px+) so tablet also sees the mockup; refined ratio at lg */}
-        <div className="grid items-center gap-12 md:grid-cols-2 md:gap-10 lg:grid-cols-[1.05fr_1fr] lg:gap-16">
+        <div className="grid items-center gap-10 md:grid-cols-2 md:gap-10 lg:grid-cols-[1.05fr_1fr] lg:gap-16">
           {/* LEFT — text + CTA */}
           <motion.div
             variants={staggerParent}

@@ -26,7 +26,7 @@ export function Pricing() {
   return (
     <section
       id="pricing"
-      className="relative bg-canvas py-20 text-ink sm:py-28"
+      className="relative bg-canvas py-14 text-ink sm:py-28"
     >
       <div className="mx-auto w-full max-w-[1240px] px-5 sm:px-8 lg:px-12">
         <div className="mx-auto max-w-3xl text-center">
@@ -45,7 +45,7 @@ export function Pricing() {
           </Reveal>
         </div>
 
-        <Reveal delay={0.24} className="mt-10 flex justify-center sm:mt-12">
+        <Reveal delay={0.24} className="mt-8 flex justify-center sm:mt-12">
           <BillingToggle mode={mode} setMode={setMode} />
         </Reveal>
 
@@ -54,7 +54,7 @@ export function Pricing() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.15 }}
-          className="mx-auto mt-12 grid max-w-[920px] grid-cols-1 gap-5 md:grid-cols-2 md:gap-6"
+          className="mx-auto mt-10 grid max-w-[920px] grid-cols-1 gap-5 sm:mt-12 md:grid-cols-2 md:gap-6"
         >
           {t.pricing.plans.map((plan, i) => (
             <motion.div key={plan.name} variants={staggerChild}>
@@ -69,7 +69,7 @@ export function Pricing() {
           ))}
         </motion.div>
 
-        <Reveal delay={0.1} className="mx-auto mt-12 max-w-2xl text-center">
+        <Reveal delay={0.1} className="mx-auto mt-10 max-w-2xl text-center sm:mt-12">
           <p className="text-[14px] leading-relaxed text-ink/70">
             {t.pricing.footnoteMain}
           </p>
@@ -207,7 +207,7 @@ function PricingCard({
   return (
     <div
       className={cn(
-        "group relative flex h-full flex-col overflow-hidden rounded-2xl p-7 transition-all duration-500 sm:p-9",
+        "group relative flex h-full flex-col overflow-hidden rounded-2xl p-6 transition-all duration-500 sm:p-9",
         featured
           ? "border-2 border-burgundy bg-featured shadow-burgundy hover:-translate-y-1 hover:shadow-burgundy-hover"
           : "border border-line bg-surface shadow-card hover:-translate-y-1 hover:shadow-card-hover"

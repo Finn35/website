@@ -12,7 +12,7 @@ export function ContactPageBody() {
   const t = useT().contact;
 
   return (
-    <main className="min-h-screen bg-cream pb-24 pt-28 sm:pt-32">
+    <main className="min-h-screen bg-cream pb-16 pt-24 sm:pb-24 sm:pt-32">
       <div className="mx-auto w-full max-w-[640px] px-4 sm:px-8">
         <header className="mb-8 text-center sm:mb-10">
           <h1 className="font-display text-display-lg font-medium leading-[1.06] text-ink text-balance">

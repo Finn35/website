@@ -12,10 +12,10 @@ export function CtaBanner() {
   return (
     <section
       id="contact"
-      className="relative isolate w-full overflow-hidden bg-canvas pb-24 pt-10 sm:pb-32"
+      className="relative isolate w-full overflow-hidden bg-canvas pb-16 pt-2 sm:pb-32 sm:pt-10"
     >
       <div className="mx-auto w-full max-w-[1240px] px-5 sm:px-8 lg:px-12">
-        <div className="relative overflow-hidden rounded-3xl bg-ink px-8 py-16 text-canvas sm:px-16 sm:py-20">
+        <div className="relative overflow-hidden rounded-3xl bg-ink px-6 py-12 text-canvas sm:px-16 sm:py-20">
           {/* burgundy glow accent */}
           <div
             aria-hidden
