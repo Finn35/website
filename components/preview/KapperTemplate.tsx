@@ -355,6 +355,38 @@ export function KapperTemplate({ preview }: { preview: Preview }) {
           </header>
 
           <BookingWidget onConfirm={openDemo} />
+
+          {/* Value-prop strip — explains what the salon owner experiences on
+              their side once a customer books. Reinforces the Groei pricing copy. */}
+          <motion.div
+            initial={{ opacity: 0, y: 14 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{
+              duration: 0.7,
+              delay: 0.1,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            className="mx-auto mt-5 flex max-w-[820px] items-start gap-4 rounded-2xl border border-canvas/10 bg-canvas/[0.04] px-5 py-4 backdrop-blur-sm sm:items-center sm:px-6 sm:py-5"
+          >
+            <span
+              aria-hidden
+              className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-gold-400/30 bg-gold-400/10 text-gold-400"
+            >
+              <CalendarIcon />
+            </span>
+            <div className="min-w-0 flex-1">
+              <p className="text-[14px] font-medium text-canvas sm:text-[14.5px]">
+                Klanten boeken hier — jij beheert vanaf je telefoon.
+              </p>
+              <p className="mt-1 text-[13px] leading-relaxed text-canvas/55 sm:text-[13.5px]">
+                Elke afspraak verschijnt automatisch in je Google Calendar.{" "}
+                <span className="text-canvas/80">
+                  Geen aparte app om te leren, geen extra abonnement.
+                </span>
+              </p>
+            </div>
+          </motion.div>
         </div>
       </section>
 
@@ -855,6 +887,31 @@ function SparkleIcon() {
         strokeLinejoin="round"
         fill="none"
       />
+    </svg>
+  );
+}
+
+function CalendarIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden>
+      <rect
+        x="3.5"
+        y="5"
+        width="17"
+        height="15"
+        rx="2.5"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        fill="none"
+      />
+      <path d="M3.5 9.5H20.5" stroke="currentColor" strokeWidth="1.5" />
+      <path
+        d="M8 3v4M16 3v4"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
+      <rect x="7" y="12" width="3" height="3" rx="0.5" fill="currentColor" />
     </svg>
   );
 }

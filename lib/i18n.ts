@@ -222,7 +222,7 @@ const nl: Translations = {
           "Alles uit Starter, plus automatisering die van bezoekers betalende klanten maakt.",
         features: [
           "Alles uit Starter",
-          "Online boekingssysteem",
+          "Online boekingssysteem — klanten boeken via de website, jij beheert via Google Calendar op je telefoon",
           "Google Reviews automatisering",
           "Prioriteit support",
           "3 updates per maand",
@@ -415,7 +415,7 @@ const en: Translations = {
           "Everything in Starter, plus the automation that turns visitors into paying customers.",
         features: [
           "Everything in Starter",
-          "Online booking system",
+          "Online booking system — customers book via your website, you manage everything from Google Calendar on your phone",
           "Google Reviews automation",
           "Priority support",
           "3 updates per month",
