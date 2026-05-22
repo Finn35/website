@@ -1,0 +1,40 @@
+# Netlify configuration for Lumeq (Next.js 14 App Router)
+# Reference: https://docs.netlify.com/frameworks/next-js/
+
+[build]
+  # npm install runs automatically before this command.
+  command   = "npm run build"
+  # The Netlify Next.js runtime plugin handles the publish dir itself —
+  # it's installed automatically. Leaving this commented keeps the
+  # plugin in control so SSR / ISR / image optimisation just work.
+  # publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "20"
+  NPM_FLAGS    = "--no-audit --no-fund"
+  # Keep build output readable in deploy logs
+  NEXT_TELEMETRY_DISABLED = "1"
+
+# Catch-all SPA-ish redirect is NOT needed — Next.js App Router handles
+# routing on its own through the Netlify Next.js runtime.
+
+# Long-lived caching for hashed static assets emitted by Next.js.
+[[headers]]
+  for = "/_next/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Custom favicon caching
+[[headers]]
+  for = "/favicon.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+# Modest security headers — sensible defaults for a marketing site.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options        = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy        = "strict-origin-when-cross-origin"
+    Permissions-Policy     = "camera=(), microphone=(), geolocation=()"
